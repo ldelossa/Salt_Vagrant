@@ -1,0 +1,15 @@
+;
+; BIND data file for local loopback interface
+;
+$TTL	604800
+@	IN	SOA	dns01 admin.dns01.local.lan. (
+			      3		; Serial
+			 604800		; Refresh
+			  86400		; Retry
+			2419200		; Expire
+			 604800 )	; Negative Cache TTL
+;
+	IN	NS	dns01
+dns01.local.lan.					IN	A	10.1.1.2
+saltmaster01.local.lan.	         	IN	A 10.1.1.10
+salt.local.lan.						IN	CNAME	saltmaster01.local.lan.

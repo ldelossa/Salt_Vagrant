@@ -1,0 +1,24 @@
+#!/bin/bash
+
+#move configuration
+sudo mv /tmp/master /etc/salt/master
+
+#setup directories
+mkdir -p /srv/pillar
+mkdir -p {/srv/salt/apps,/srv/salt/files/apps}
+touch /srv/salt/top.sls
+touch /srv/pillar/top.sls
+
+#boostrap DNS state
+mkdir /srv/pillar/dns01
+mkdir /srv/salt/apps/bind/
+mkdir /srv/salt/files/apps/bind/
+
+mv /tmp/db.local.lan /srv/salt/files/apps/bind/
+mv /tmp/named.conf.local /srv/salt/files/apps/bind/
+mv /tmp/named.conf.options /srv/salt/files/apps/bind/
+mv /tmp/install.sls /srv/salt/apps/bind/
+mv /tmp/state_top.sls /srv/salt/top.sls
+
+#restart salt-master
+service salt-master restart
